@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="col-md-12">
+    <div id="logbox">
+      <form id="login" method="post" action="/login" *ngIf="loginDiv">
+        <h1>Login</h1>
+        <br>
+        <div class="input-group inp-grp-padd">
+          <span class="input-group-addon" id="basic-addon1">
+            <fa class="inp-icon" name="user"></fa>
+          </span>
+          <input type="email" class="form-control" [(ngModel)]="user.email" name="user[email]" placeholder="Username"
+            aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group inp-grp-padd">
+          <span class="input-group-addon" id="basic-addon1">
+            <fa class="inp-icon" name="lock"></fa>
+          </span>
+          <input type="password" class="form-control" [(ngModel)]="user.password" name="user[password]" placeholder="Password"
+            required="required" aria-describedby="basic-addon1">
+        </div>
+        <input *ngIf="!ProgressSpinner" type="submit" value="Login" class="inputButton" (click)="login(user)" />
+
+        <mat-spinner *ngIf="ProgressSpinner" style="left: 41%;padding-top: 2%" strokeWidth="3" [diameter]="30"></mat-spinner>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Check Your Registered Email Address!</h4>
+        </div>
+        <div class="modal-body">
+          <h5>{{checkMailMsg}}
+            <br>
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="authService.logout()">ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="errModal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Something Went Wrong!</h4>
+        </div>
+        <div class="modal-body">
+          <h5>{{loginErr}}
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="clearFormFields()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <h2 mat-dialog-title>This is a Dialog title</h2>
+
+<mat-dialog-content>
+
+<p> Place content here </p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions> -->

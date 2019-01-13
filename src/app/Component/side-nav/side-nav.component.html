@@ -1,0 +1,102 @@
+<mat-toolbar class="menu-header" flex sticky>
+  <mat-toolbar-row>
+    <button *ngIf="authService.islogin" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" style="background-color:#5f84fb;color: white">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span style="padding-left:3%">
+      <h3> Fire Safety & Security</h3>
+    </span>
+    <span class="example-fill-remaining-space">
+    </span>
+    <span>
+      <a *ngIf="!authService.islogin" (click)="login('login')" class="btn btn-primary">Login</a>
+      <a *ngIf="authService.islogin" (click)="logout($event)" class="btn btn-primary">Logout</a>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="push" closed role="navigation" class="sidenav">
+    <mat-nav-list>
+      <!-- <h4 *ngIf="!authService.islogin">
+        <a mat-list-item (click)="login('login')" >Login</a>  
+      </h4>
+      <mat-divider></mat-divider>
+      <h4 *ngIf="authService.islogin">
+        <a mat-list-item (click)="logout('login')">Logout</a>
+      </h4>
+      <mat-divider></mat-divider> -->
+      <h4>
+        <a mat-list-item routerLink='' (click)="login('home')">Home</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/IntroductionComponent' (click)="login('')"> 1. Introduction</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/PortablefireextinguisherComponent' (click)="login('home')">2. Portable Fire Extinguisher</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/FirehydrantsystemComponent' (click)="login('home')">3. Fire Hydrant System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/FireRiserSystemComponent' (click)="login('home')">4. Fire Riser System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/FireSprinklerSystemComponent' (click)="login('home')">5. Fire Sprinkler System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='FireSuppressionSystemComponent' (click)="login('home')">6. Fire Suppression System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='SmokeDetectorsComponent' (click)="login('home')">7. Smoke Detectors</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='GasDetectorsComponent' (click)="login('home')">8. Gas Detectors</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/FireAlarmSystemComponent' (click)="login('home')">9. Fire Alarm System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='PASystemComponent' (click)="login('home')">10. PA System </a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='CctvComponent' (click)="login('home')">11. CCTV</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/RodentRepellentSystemComponent'(click)="login('home')">12. Rodent Repellent System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/WaterLeakDetectionSystemComponent' (click)="login('home')">13. Water Leak Detection System</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/FireEscapesComponent' (click)="login('home')">14. Fire Escapes</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/SafetyMeasuresComponent'(click)="login('home')">15. Safety Measures</a>
+      </h4>
+      <mat-divider></mat-divider>
+      <h4>
+        <a mat-list-item routerLink='/QueryComponent' (click)="login('home')">Queries / Feedback</a>
+      </h4>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="background-color:white">
+    <!-- <app-home></app-home> -->
+    <app-login *ngIf="showlogin" (isLoginEvent)="updateFromChild($event)" ></app-login>
+    <router-outlet *ngIf="!showlogin" ></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

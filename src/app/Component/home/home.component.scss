@@ -1,0 +1,27 @@
+.bg{
+    min-height: 650px;
+    // padding: 50px 0;
+    background-image: url('../../../assets/home-bg.jpg');
+    background-color: #fa7d7d;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.safety{
+    padding: 2% 0% 2% 5%;
+    background-color: #ffffff;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    border-radius: 20px;
+    color: white;
+}
+
+.safety h1 {
+    font-weight: bold;
+    color: #000000;
+  }
+
+  .safety div h3 li {
+    font-weight: bold;
+    color: #000000;
+  }

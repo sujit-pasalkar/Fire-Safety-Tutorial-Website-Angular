@@ -1,0 +1,43 @@
+.menu-header {
+    background: linear-gradient(to right,#5f84fb, red, );
+    color: white;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 255, 0.2);
+
+    // position: sticky;
+    // position: -webkit-sticky; /* For macOS/iOS Safari */
+    // top: 0; /* Sets the sticky toolbar to be on top */
+    // z-index: 1000; 
+  }
+
+  .sidenav {
+    background: linear-gradient(to right, #5f84fb, lightBlue);
+    color: white;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 255, 0.2);
+  }
+
+
+.example-fill-remaining-space{
+    flex: 1 1 auto;
+}
+
+::ng-deep .mat-toolbar{
+    z-index: 1000;
+    // position: fixed;
+    top: 0; 
+    position: sticky;
+    position: -webkit-sticky;
+  }
+  ::ng-deep .mat-tab-group{
+    margin-top:55px !important;
+  }
+  
+//   ::ng-deep .mat-tab-header{
+//         z-index: 999;
+//         width:100vw;
+//         position: fixed  !important;
+//         background-color: red !important;
+//   }
+//   ::ng-deep .mat-tab-body-wrapper{
+//       position: relative !important;
+//       margin-top:55px;
+//   }

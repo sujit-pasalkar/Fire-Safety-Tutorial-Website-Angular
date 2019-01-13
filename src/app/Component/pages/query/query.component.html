@@ -1,0 +1,60 @@
+
+<div class="container">
+  <br>
+<form name="form" role="form" (ngSubmit)="f.form.valid  && authForm.valid && submit()" #f="ngForm" autocomplete="on">
+  <div class="form-group" [formGroup]="authForm">
+    <p>Fields marked with <b style="color: red">*</b> are mandatory</p>
+    <label for="Email">Email Address
+      <b style="color: red">*</b>
+    </label>
+    <input class="form-control" [(ngModel)]="email" formControlName='email' type="email" id="email" name="email"
+      >
+    <div *ngIf="f.submitted" class="invalid-input">
+      <div *ngIf="authForm.get('email').hasError('required')">Email is required *</div>
+      <div *ngIf="f.submitted && authForm.get('email').hasError('email')"> Email must be a valid
+        email
+        address*
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" [formGroup]="authForm">
+    <label for="question">your name
+      <b style="color: red">*</b>
+      <small>(write your name)</small>
+    </label>
+    <input class="form-control" [(ngModel)]="name" formControlName='name' type="text" id="name" name="name">
+
+  </div>
+
+  <div class="form-group" [formGroup]="authForm">
+      <label for="question">your lastname
+        <b style="color: red">*</b>
+        <small>(write your lastname)</small>
+      </label>
+      <input class="form-control" [(ngModel)]="lastname" formControlName='lastname' type="text" id="lastname" name="lastname">
+  
+    </div>
+
+  <div class="form-group" [formGroup]="authForm">
+    <label for="desc">Write your feedback here..
+      <b style="color: red">*</b>
+      <small>(Minimum 10 characters are required)</small>
+    </label>
+    <textarea class="form-control" id="desc" name="desc" rows="8" formControlName='desc' required [(ngModel)]="this.desc"
+      style="resize: none;"></textarea>
+    <div *ngIf="f.submitted" class="invalid-input">
+      <div *ngIf="authForm.get('desc').hasError('required')">Description required
+        <b style="color: red">*</b>
+      </div>
+      <div *ngIf="authForm.get('desc').hasError('minlength')">Minimum 10 characters are required *
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center">
+    <button type="submit" class="btn btn-ar btn-primary btn-lg">Submit</button>
+  </div>
+  <br>
+</form>
+</div>

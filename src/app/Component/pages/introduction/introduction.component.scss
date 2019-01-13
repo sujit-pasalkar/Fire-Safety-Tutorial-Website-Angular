@@ -1,0 +1,58 @@
+
+.sidenav {
+    min-height: 650px;
+    background-size: cover;
+  }
+
+  .u-tube{
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; 
+    height: 0;
+  }
+
+  .u-tube iframe{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+  }
+
+  ul li::before {
+    color: blue; /* Change the color */
+    font-weight: bold; /* If you want it to be bold */
+    display: inline-block; /* Needed to add space between the bullet and the text */ 
+    width: 1em; /* Also needed for space (tweak if needed) */
+    margin-left: -1em; /* Also needed for space (tweak if needed) */
+  }
+
+  p{
+    text-align: justify;
+  text-justify: inter-word;
+  }
+
+
+  table {
+    // font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  // table, th, td {
+  //   border: 1px solid black;
+  //   border-collapse: collapse;
+  //   margin: 5px;
+  //   padding: 15px;
+  // }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

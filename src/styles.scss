@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~font-awesome/scss/font-awesome.scss";
+
+// html, body { height: 100%; }
+// body { margin: 0; 
+//   font-family: 'Roboto', sans-serif; 
+// }
+
+// p{
+//     text-align: justify;
+//   text-justify: inter-word;
+//   }
+
+.u-tube{
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; 
+  height: 0;
+}
+
+.u-tube iframe{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+}
