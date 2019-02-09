@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Component/home/home.component';
@@ -7,7 +8,7 @@ import { HeaderComponent } from './Component/header/header.component';
 import { FooterComponent } from './Component/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SideNavComponent } from './Component/side-nav/side-nav.component';
-import {CustomMaterialModule} from "./core/material.module";
+import { CustomMaterialModule } from "./core/material.module";
 import { IntroductionComponent } from './Component/pages/introduction/introduction.component';
 import { PortablefireextinguisherComponent } from './Component/pages/portablefireextinguisher/portablefireextinguisher.component';
 import { FirehydrantsystemComponent } from './Component/pages/firehydrantsystem/firehydrantsystem.component';
@@ -114,6 +115,7 @@ import {
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -123,7 +125,9 @@ import {
     AngularFirestoreModule,
     AngularFontAwesomeModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatRadioModule,
+
 
     // AccordionModule,
     // PanelModule,
@@ -138,7 +142,7 @@ import {
     // TooltipModule
 
   ],
-  providers: [AngularFirestore, AngularFireAuth,CookieService],
+  providers: [AngularFirestore, AngularFireAuth, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -123,4 +123,8 @@ export class AuthService {
     this.router.navigate(['']);
     // this.toggleIsLogin();
   }
+
+  sendMail(){
+    
+  }
 }

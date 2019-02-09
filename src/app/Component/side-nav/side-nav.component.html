@@ -9,11 +9,9 @@
     <span class="example-fill-remaining-space">
     </span>
     <span>
-        <button style="background-image: url(../../../assets/home-bg.jpg);border-radius:50%;"></button>
-             <!-- <img src="../../../assets/home-bg.jpg" alt="profile" style="border-radius:50%;"> -->
-        &nbsp;
-      <a *ngIf="!authService.islogin" (click)="login('login')" class="btn btn-primary">Login</a>
-      <a *ngIf="authService.islogin" (click)="logout($event)" class="btn btn-primary">Logout</a>  
+      <a *ngIf="!authService.islogin && !this.showlogin" (click)="login('login')" class="btn btn-primary">Log Me In</a>
+      <a *ngIf="this.showlogin" (click)="login('home')" class="btn btn-primary">Back To Home</a>      
+      <a *ngIf="authService.islogin" (click)="logout($event)" class="btn btn-primary">Logout</a>
     </span>
   </mat-toolbar-row>
 </mat-toolbar>

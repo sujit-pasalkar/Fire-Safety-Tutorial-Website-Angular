@@ -1,60 +1,181 @@
-
 <div class="container">
   <br>
-<form name="form" role="form" (ngSubmit)="f.form.valid  && authForm.valid && submit()" #f="ngForm" autocomplete="on">
-  <div class="form-group" [formGroup]="authForm">
-    <p>Fields marked with <b style="color: red">*</b> are mandatory</p>
-    <label for="Email">Email Address
-      <b style="color: red">*</b>
-    </label>
-    <input class="form-control" [(ngModel)]="email" formControlName='email' type="email" id="email" name="email"
-      >
-    <div *ngIf="f.submitted" class="invalid-input">
-      <div *ngIf="authForm.get('email').hasError('required')">Email is required *</div>
-      <div *ngIf="f.submitted && authForm.get('email').hasError('email')"> Email must be a valid
-        email
-        address*
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group" [formGroup]="authForm">
-    <label for="question">your name
-      <b style="color: red">*</b>
-      <small>(write your name)</small>
-    </label>
-    <input class="form-control" [(ngModel)]="name" formControlName='name' type="text" id="name" name="name">
-
-  </div>
-
-  <div class="form-group" [formGroup]="authForm">
-      <label for="question">your lastname
-        <b style="color: red">*</b>
-        <small>(write your lastname)</small>
-      </label>
-      <input class="form-control" [(ngModel)]="lastname" formControlName='lastname' type="text" id="lastname" name="lastname">
-  
-    </div>
-
-  <div class="form-group" [formGroup]="authForm">
-    <label for="desc">Write your feedback here..
-      <b style="color: red">*</b>
-      <small>(Minimum 10 characters are required)</small>
-    </label>
-    <textarea class="form-control" id="desc" name="desc" rows="8" formControlName='desc' required [(ngModel)]="this.desc"
-      style="resize: none;"></textarea>
-    <div *ngIf="f.submitted" class="invalid-input">
-      <div *ngIf="authForm.get('desc').hasError('required')">Description required
-        <b style="color: red">*</b>
-      </div>
-      <div *ngIf="authForm.get('desc').hasError('minlength')">Minimum 10 characters are required *
-      </div>
-    </div>
-  </div>
-
-  <div style="text-align: center">
-    <button type="submit" class="btn btn-ar btn-primary btn-lg">Submit</button>
+  <div class="container" style="background-color:#5f84fb;
+      border-radius: 13px;">
+    <h3 style="text-align:center;">Queries And Feedback</h3>
   </div>
   <br>
-</form>
+  <div class="container row">
+    <div class="col-md-4 col-sm-4  col-lg-4">
+      <h4> <b>Your Choice</b> </h4>
+    </div>
+    <mat-radio-group [(ngModel)]="selectedOption">
+      <div class="col-md-4 col-sm-4  col-lg-4">
+        <mat-radio-button value="Query" color="primary" (change)="getOption($event)">
+          <h4>Submit a Query</h4>
+        </mat-radio-button>
+
+      </div>
+      <div class="col-md-4 col-sm-4  col-lg-4">
+        <mat-radio-button value="Feedback" color="primary" (change)="getOption($event)">
+          <!--  [(ngModel)]="showQuery" -->
+          <h4>Submit a Feedback</h4>
+        </mat-radio-button>
+      </div>
+    </mat-radio-group>
+  </div>
+  <div class="container">
+    <div class="jumbotron" *ngIf="showQuery">
+      <div style="text-align:center">
+        <h2>{{selectedOption}}</h2>
+      </div>
+      <br>
+       <!-- action="mailto:sujitpasalkar888@gmail.com" method="post" enctype="text/plain" -->
+      <form name="form" role="form" (ngSubmit)="f.form.valid  && authFormQ.valid && submitQuery()" #f="ngForm"
+        autocomplete="on">
+        <div class="form-group" [formGroup]="authFormQ">
+          <h5>Fields marked with <b style="color: red">*</b> are mandatory</h5>
+          <label for="Email">Email Address
+            <b style="color: red">*</b>
+          </label>
+          <input class="form-control" [(ngModel)]="email" formControlName='email' type="email" id="email" name="email">
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormQ.get('email').hasError('required')">
+              <p style="color: red;font-size: 15px">Email is required *</p>
+
+            </div>
+            <div *ngIf="f.submitted && authFormQ.get('email').hasError('email')">
+              <p style="color: red;font-size: 15px">Email must be a valid
+                email
+                address*</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" [formGroup]="authFormQ">
+          <label for="question">Your First Name
+            <b style="color: red">*</b>
+            <small>(write your name)</small>
+          </label>
+          <input class="form-control" [(ngModel)]="name" formControlName='name' type="text" id="name" name="name">
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormQ.get('lastname').hasError('required')">
+              <p style="color: red;font-size: 15px">First Name is required *</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" [formGroup]="authFormQ">
+          <label for="question">Your Last Name
+            <b style="color: red">*</b>
+            <small>(write your lastname)</small>
+          </label>
+          <input class="form-control" [(ngModel)]="lastname" formControlName='lastname' type="text" id="lastname" name="lastname">
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormQ.get('name').hasError('required')">
+              <p style="color: red;font-size: 15px">Last Name is required *</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" [formGroup]="authFormQ">
+          <label for="question">Write your Query here..
+            <b style="color: red">*</b>
+            <small>(Minimum 10 characters are required)</small>
+          </label>
+          <textarea class="form-control" id="question" name="question" rows="8" formControlName='question' required
+            [(ngModel)]="this.question" style="resize: none;"></textarea>
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormQ.get('question').hasError('required')">
+              <p style="color: red;font-size: 15px">Description required *</p>
+            </div>
+            <div *ngIf="authFormQ.get('question').hasError('minlength')">
+              <p style="color: red;font-size: 15px"> Minimum 10 characters are required *</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center">
+          <button type="submit" class="btn btn-ar btn-primary btn-lg">Submit</button>
+        </div>
+        <br>
+      </form>
+    </div>
+    <!--  -->
+    <div class="jumbotron" *ngIf="!showQuery">
+      <div style="text-align:center">
+        <h2>{{selectedOption}}</h2>
+      </div>
+      <br>
+      <form name="form" role="form" (ngSubmit)="f.form.valid  && authFormF.valid && submitFeedback()" #f="ngForm"
+        autocomplete="on">
+        <div class="form-group" [formGroup]="authFormF">
+          <h5>Fields marked with <b style="color: red">*</b> are mandatory</h5>
+          <label for="Email">Email Address
+            <b style="color: red">*</b>
+          </label>
+          <input class="form-control" [(ngModel)]="email" formControlName='email' type="email" id="email" name="email">
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormF.get('email').hasError('required')">
+              <p style="color: red;font-size: 15px">Email is required *</p>
+
+            </div>
+            <div *ngIf="f.submitted && authFormF.get('email').hasError('email')">
+              <p style="color: red;font-size: 15px">Email must be a valid
+                email
+                address*</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" [formGroup]="authFormF">
+          <label for="question">Your First Name
+            <b style="color: red">*</b>
+            <small>(write your name)</small>
+          </label>
+          <input class="form-control" [(ngModel)]="name" formControlName='name' type="text" id="name" name="name">
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormF.get('lastname').hasError('required')">
+              <p style="color: red;font-size: 15px">First Name is required *</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" [formGroup]="authFormF">
+          <label for="question">Your Last Name
+            <b style="color: red">*</b>
+            <small>(write your lastname)</small>
+          </label>
+          <input class="form-control" [(ngModel)]="lastname" formControlName='lastname' type="text" id="lastname" name="lastname">
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormF.get('name').hasError('required')">
+              <p style="color: red;font-size: 15px">Last Name is required *</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" [formGroup]="authFormF">
+          <label for="desc">Write your fedback here..
+            <b style="color: red">*</b>
+            <small>(Minimum 10 characters are required)</small>
+          </label>
+          <textarea class="form-control" id="desc" name="desc" rows="8" formControlName='desc' required [(ngModel)]="this.desc"
+            style="resize: none;"></textarea>
+          <div *ngIf="f.submitted" class="invalid-input">
+            <div *ngIf="authFormF.get('desc').hasError('required')">
+              <p style="color: red;font-size: 15px">Description required *</p>
+            </div>
+            <div *ngIf="authFormF.get('desc').hasError('minlength')">
+              <p style="color: red;font-size: 15px"> Minimum 10 characters are required *</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center">
+          <button type="submit" class="btn btn-ar btn-primary btn-lg">Submit</button>
+        </div>
+        <br>
+      </form>
+    </div>
+  </div>
 </div>

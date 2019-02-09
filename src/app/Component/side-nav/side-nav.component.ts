@@ -13,6 +13,7 @@ import { LoginComponent } from '../pages/login/login.component';
 export class SideNavComponent implements OnInit {
 
   showlogin:boolean;
+  // showHome:boolean;
 
   constructor(public authService: AuthService,
     public router: Router,
@@ -46,15 +47,20 @@ export class SideNavComponent implements OnInit {
     })
   }
 
+  // home(){
+  //   this.showHome = false;    
+  //   this.router.navigate(['']);    
+  // }
+
   login(show){
     console.log('login :'+show)
     if(show == 'login')
     {
       this.showlogin = true;
+      // this.showHome = true;
     }
     else{
       this.showlogin = false;
-      // this.router.navigate(['']);
     }
   }
 
