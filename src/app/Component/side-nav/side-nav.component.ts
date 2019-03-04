@@ -2,6 +2,8 @@ import { Component, OnInit,Input, Output, EventEmitter, Inject } from '@angular/
 import { AuthService } from "../../services/auth/auth.service";
 import { Router } from '@angular/router';
 import { LoginComponent } from '../pages/login/login.component';
+import { MatDialog } from '@angular/material';
+import { ConfermLogoutComponent } from '../dialogs/conferm-logout/conferm-logout.component'
 
 
 
@@ -17,6 +19,7 @@ export class SideNavComponent implements OnInit {
 
   constructor(public authService: AuthService,
     public router: Router,
+    private dialog: MatDialog,
   ) {
     // authService.check();
     // this.authService.isloginChange.subscribe(value => {
@@ -41,10 +44,20 @@ export class SideNavComponent implements OnInit {
   }
 
   logout($event) {
-    this.authService.logout().then(() => {
-      // this.clear();
-      this.router.navigate(['']);
+    let dialogRef = this.dialog.open(ConfermLogoutComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      // NOTE: The result can also be nothing if the user presses the `esc` key or clicks outside the dialog
+      if (result == 'confirm') {
+        console.log('logout');
+        this.authService.logout().then(() => {
+          // this.clear();
+          this.router.navigate(['']);
+        })
+      }
     })
+
+
+    
   }
 
   // home(){

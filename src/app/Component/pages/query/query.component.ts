@@ -5,6 +5,8 @@ import { MatRadioChange } from '@angular/material';
 // import { AuthService } from "../../../Services/auth/auth.service";
 import {MailService} from "../../../Services/mail/mail.service";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { OkDialogComponent } from "../../dialogs/ok-dialog/ok-dialog.component";
 // import { Http, Headers, Response, URLSearchParams } from '@angular/http';
 // import 'rxjs/add/operator/toPromise';
 
@@ -36,7 +38,8 @@ export class QueryComponent implements OnInit {
     public router: Router,
     // public authService: AuthService,
     private http: HttpClient,
-    private mailService: MailService
+    private mailService: MailService,
+    public dialog: MatDialog,
 
   ) {
 
@@ -60,6 +63,18 @@ export class QueryComponent implements OnInit {
   ngOnInit() {
   }
 
+  openDialog(title, content) {
+    // let config = new MdDialogConfig().data();
+    let dialogRef = this.dialog.open(OkDialogComponent, {
+      data: {
+        title: title,
+        content: content
+      },
+    });
+    dialogRef.componentInstance.title = title;
+    dialogRef.componentInstance.content = content;
+  }
+
   submitQuery() {
     console.log('in submit Query');
     console.log('email : ' + this.email);
@@ -75,6 +90,8 @@ export class QueryComponent implements OnInit {
     // });
     // this.req();
     this.mailService.addQuery(this.email,this.name,this.lastname,this.question);
+    this.openDialog('Message', 'Your Query Submitted.');
+
   }
 
   submitFeedback() {
@@ -82,7 +99,7 @@ export class QueryComponent implements OnInit {
     console.log('email : ' + this.email);
     console.log('name : ' + this.name);
     this.mailService.addFeedback(this.email,this.name,this.lastname,this.desc);
-
+    this.openDialog('Message', 'Your Feedback Submitted.');
   }
 
   sendEmail() {

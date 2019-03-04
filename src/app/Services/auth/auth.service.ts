@@ -4,19 +4,15 @@ import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import * as firebase from "firebase";
-// import { Observable } from " '@angular/core';
-// import { Subject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user:User;
-  // user1: Observable<firebase.User>;
-  
-  islogin: boolean ;
-  // isloginChange: Subject<boolean> = new Subject<boolean>();
+  user: User;
+
+  islogin: boolean;
   currentUser: any; //user info
   userState;
 
@@ -25,31 +21,32 @@ export class AuthService {
     public router: Router,
     private cookieService: CookieService,
 
-  ) { 
-  //   this.isloginChange.subscribe((value) => {
-  //     this.islogin = value;
-  // });
+  ) {
+    // console.log("fb current user:" + firebase.auth().currentUser);
+
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        // console.log('user is logged in : ' + JSON.stringify(res));
+        this.islogin = true;
+      } else {
+        console.log('user not logged in');
+        this.islogin = false;
+      }
+    });
   }
 
-//   toggleIsLogin() {
-//     this.isloginChange.next(this.islogin);
-//     console.log('called toggleIsLogin:' +this.islogin);
-// }
-
-  // async check() {
-  // }
 
   async signup(user) {
-    if (user.password === user.confirmPassword) {
+    // if (user.password === user.confirmPassword) {
       try {
         return await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
       } catch (e) {
         throw new Error(e);
       }
-    }
-    else {
-      throw new Error('Password Not Matched');
-    }
+    // }
+    // else {
+    //   throw new Error('Password Not Matched');
+    // }
   }
 
   async verifyEmail(email) {
@@ -58,10 +55,14 @@ export class AuthService {
 
   async login(user) {
     try {
-    console.log('in auth ligin()')
+      console.log('in auth ligin()');
+      // var res = await this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(async () => {
+      //   return await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+      // })
+      // return res;
       return await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
     } catch (e) {
-    console.log('in auth ligin() err'+e)
+      console.log('in auth ligin() err' + e)
       throw new Error(e);
     }
   }
@@ -81,14 +82,8 @@ export class AuthService {
         }
         else {
           this.cookieService.set('userState', "user", 1);
-          // #product_brought _2nd time 
-          // this.firestoreService.subscribeSignedUser(this.currentUser.user.email).then(res => {
-          //   console.log("Async await fails..in login auth")
-          // });
         }
         this.userState = this.cookieService.get('userState');
-        //#
-        // this.checkPersonalDetails(this.currentUser);
       }
       else {
         //#localeStorage or sessionStorage
@@ -101,30 +96,23 @@ export class AuthService {
         }
         else {
           sessionStorage.setItem('userState', "user");
-          // #product_brought
-          // this.firestoreService.subscribeSignedUser(this.currentUser.user.email).then(res => {
-          //   console.log("Async await fails..in login auth")
-          // });
         }
         this.userState = sessionStorage.getItem('userState');
-        // this.checkPersonalDetails(this.currentUser );
       }
-      //
-      // this.toggleIsLogin();
     }
   }
 
- async logout() {
+  async logout() {
     this.afAuth.auth.signOut();
     this.islogin = false;
+    this.userState = null;
     this.cookieService.deleteAll();
     sessionStorage.removeItem('currentUser');
     sessionStorage.removeItem('userState');
     this.router.navigate(['']);
-    // this.toggleIsLogin();
   }
 
-  sendMail(){
-    
+  sendMail() {
+
   }
 }

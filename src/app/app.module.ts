@@ -69,6 +69,8 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { ConfermLogoutComponent } from './Component/dialogs/conferm-logout/conferm-logout.component';
+import { OkDialogComponent } from './Component/dialogs/ok-dialog/ok-dialog.component';
 
 
 
@@ -111,7 +113,9 @@ import {
     FireEscapesComponent,
     SafetyMeasuresComponent,
     QueryComponent,
-    LoginComponent
+    LoginComponent,
+    ConfermLogoutComponent,
+    OkDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -142,6 +146,7 @@ import {
     // TooltipModule
 
   ],
+  entryComponents :[ConfermLogoutComponent,OkDialogComponent],
   providers: [AngularFirestore, AngularFireAuth, CookieService],
   bootstrap: [AppComponent]
 })
